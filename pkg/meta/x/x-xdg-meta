@@ -1,0 +1,12 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=x-xdg-meta
+pkgdesc='XDG'
+url=https://github.com/szatanjl/packages
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+
+depends=(xdg-utils xdg-user-dirs)
+# TODO replace with own `open` tool (look at linopen, sx-open)
