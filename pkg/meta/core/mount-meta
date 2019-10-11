@@ -1,0 +1,14 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=mount-meta
+pkgdesc='Mount tools'
+url=https://github.com/szatanjl/packages
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+
+depends=(
+	udevil
+	sshfs
+)
