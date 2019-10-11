@@ -1,0 +1,11 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=devel-x-meta
+pkgdesc='X libs'
+url=https://github.com/szatanjl/packages
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+
+depends=(libx11 libxft libxrandr libxinerama)
