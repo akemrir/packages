@@ -1,0 +1,37 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=sysinstall
+pkgdesc='System installation script'
+url=https://github.com/szatanjl/sysinstall
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+source=("$pkgname::git+$url.git")
+md5sums=(SKIP)
+
+depends=(sh coreutils sed util-linux pacman)
+optdepends=('procps-ng: swap (free) support'
+            'dosfstools: vfat filesystem support'
+            'e2fsprogs: ext4 filesystem support')
+makedepends=(make coreutils git)
+
+pkgver()
+{
+	cd -- "$srcdir/$pkgname"
+	printf '%s.%s' "$(TZ=UTC git log -n 1 --format=%cd \
+	                                 --date=format-local:%Y%m%d)" \
+	               "$(git rev-parse --short HEAD)"
+}
+
+build()
+{
+	cd -- "$srcdir/$pkgname"
+	make prefix=/usr
+}
+
+package()
+{
+	cd -- "$srcdir/$pkgname"
+	make DESTDIR="$pkgdir" prefix=/usr install
+}
