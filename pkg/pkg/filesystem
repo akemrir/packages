@@ -1,0 +1,37 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=filesystem
+pkgdesc='Filesystem hierarchy'
+url=https://github.com/szatanjl/filesystem
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+source=("$pkgname::git+$url.git")
+md5sums=(SKIP)
+
+makedepends=(make coreutils git)
+
+pkgver()
+{
+	cd -- "$srcdir/$pkgname"
+	printf '%s.%s' "$(TZ=UTC git log -n 1 --format=%cd \
+	                                 --date=format-local:%Y%m%d)" \
+	               "$(git rev-parse --short HEAD)"
+}
+
+build()
+{
+	cd -- "$srcdir/$pkgname"
+	make
+}
+
+package()
+{
+	cd -- "$srcdir/$pkgname"
+	make DESTDIR="$pkgdir" install
+
+	# for compatibility with hardcoded glibc loader path
+	# /lib64/ld-linux-x86-64.so.2
+	ln -s -f lib "$pkgdir/lib64"
+}
