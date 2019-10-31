@@ -1,0 +1,33 @@
+# Maintainer: szatanjl <szatan@gecc.xyz>
+pkgname=config
+pkgdesc='System configuration'
+url=https://github.com/szatanjl/config
+license=(unknown)
+
+pkgver=1
+pkgrel=1
+arch=(any)
+source=("$pkgname::git+$url.git")
+md5sums=(SKIP)
+
+makedepends=(make coreutils git)
+
+pkgver()
+{
+	cd -- "$srcdir/$pkgname"
+	printf '%s.%s' "$(TZ=UTC git log -n 1 --format=%cd \
+	                                 --date=format-local:%Y%m%d)" \
+	               "$(git rev-parse --short HEAD)"
+}
+
+build()
+{
+	cd -- "$srcdir/$pkgname"
+	make sysconfdir=/etc
+}
+
+package()
+{
+	cd -- "$srcdir/$pkgname"
+	make DESTDIR="$pkgdir" sysconfdir=/etc install
+}
