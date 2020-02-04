@@ -3,7 +3,7 @@ pkgfiles = $(pkg_files) $(meta_files)
 pkg_files = $(sys_files) $(de_files) pkg/quark pkg/git-zero
 
 sys_files = \
-	pkg/config pkg/filesystem pkg/packages pkg/pacman-extra \
+	pkg/packages pkg/pacman-extra \
 	pkg/sysinstall
 
 de_files = pkg/dwm pkg/dmenu pkg/slock pkg/dwm-utils
